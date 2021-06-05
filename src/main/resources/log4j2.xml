@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="debug" name="XMLConfigTest">
+    <Appenders>
+        <Console name="STDOUT">
+            <BunyanLayout appName="vertx2" />
+        </Console>
+        <RollingFile name="FILE" fileName="/var/log/vertx2.log"
+                     filePattern="/var/log/cc-indexer/vertx2-%1.log">
+            <BunyanLayout appName="vertx2" />
+            <SizeBasedTriggeringPolicy size="50 MB"/>
+            <DefaultRolloverStrategy max="5"/>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Logger name="io.netty.handler.codec.http" level="warn" additivity="false">
+            <AppenderRef ref="FILE" />
+        </Logger>
+        <Logger name="io.vertx" level="warn" additivity="false">
+            <AppenderRef ref="STDOUT" />
+            <AppenderRef ref="FILE" />
+        </Logger>
+        <Root level="debug">
+            <AppenderRef ref="STDOUT" />
+            <AppenderRef ref="FILE" />
+        </Root>
+    </Loggers>
+</Configuration>
